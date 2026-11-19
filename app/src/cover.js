@@ -143,20 +143,28 @@ export function drawCaption(ctx, state, zone, W, H) {
   ctx.textAlign = align === 'center' ? 'center' : 'left';
   ctx.textBaseline = 'alphabetic';
 
-  // Fit the title: shrink until one or two lines fit the zone.
+  // Fit the title: shrink until one or two lines fit the zone, with the
+  // subtitle included in the zone's height so it never spills out.
   let size = zh * 0.58 * (state.titleSize ?? 1);
   let lines = [];
+  let subSize = 0;
   while (size > H * 0.02) {
     ctx.font = `400 ${size}px Anton, 'Arial Narrow', sans-serif`;
     lines = wrapTitle(ctx, text, zw * 0.94);
     const widest = Math.max(...lines.map((l) => ctx.measureText(l).width));
-    if (widest <= zw * 0.94) break;
+    subSize = sub ? Math.max(H * 0.018, size * 0.34) : 0;
+    const total = lines.length * size * 0.98 + (sub ? subSize * 1.4 : 0);
+    if (widest <= zw * 0.94 && total <= zh * 0.96) break;
     size *= 0.92;
   }
   const lineHeight = size * 0.98;
   const blockH = lines.length * lineHeight;
-  const subH = sub ? size * 0.42 : 0;
-  let top = zy + (zh - blockH - subH) / 2 + size * 0.82;
+  const totalH = blockH + (sub ? subSize * 1.4 : 0);
+  // Title block is centred in the zone; the subtitle sits just under the
+  // last title line, inside the zone.
+  const titleTop = zy + (zh - totalH) / 2;
+  const firstBaseline = titleTop + size * 0.82;
+  let top = firstBaseline;
 
   const paint = (drawY) => {
     lines.forEach((line, i) => {
@@ -187,13 +195,12 @@ export function drawCaption(ctx, state, zone, W, H) {
   paint(top);
 
   if (sub) {
-    const subSize = Math.max(H * 0.018, size * 0.34);
     ctx.font = `400 ${subSize}px Pacifico, cursive`;
     ctx.textAlign = align === 'center' ? 'center' : 'left';
     ctx.fillStyle = grade.accent;
     ctx.shadowColor = grade.accent;
     ctx.shadowBlur = subSize * 0.6;
-    ctx.fillText(sub, cx, top + blockH + subSize * 0.7);
+    ctx.fillText(sub, cx, firstBaseline + (lines.length - 1) * lineHeight + subSize * 1.15);
     ctx.shadowBlur = 0;
   }
 
