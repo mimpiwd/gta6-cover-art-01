@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Coast — GTA 6-style Cover Studio</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="brand-mark">VC</span> VICE COAST <span class="brand-sub">Cover Studio</span></div>
+  <p class="tagline">Turn your photos into GTA 6-style poster art — offline, nothing uploaded.</p>
+</header>
+<main class="app">
+  <section class="controls" aria-label="Cover editor">
+    <div class="step">
+      <h2><span class="num">1</span> Photos</h2>
+      <p class="hint">Tap a sample, or add your own photos. They never leave your machine.</p>
+      <div id="thumbs" class="thumbs"></div>
+      <label class="upload-btn">Add your photos…
+        <input id="upload" type="file" accept="image/*" multiple hidden>
+      </label>
+    </div>
+
+    <div class="step">
+      <h2><span class="num">2</span> Layout</h2>
+      <div id="layouts" class="pickrow"></div>
+    </div>
+
+    <div class="step">
+      <h2><span class="num">3</span> Sunset grade</h2>
+      <div id="grades" class="pickrow"></div>
+    </div>
+
+    <div class="step">
+      <h2><span class="num">4</span> Selected panel</h2>
+      <p class="hint"><strong id="panelLabel">Panel 1 of 4</strong> — click a panel in the preview, drag to move its photo, scroll to zoom.</p>
+      <label>Photo in this panel
+        <select id="panelPhoto"></select>
+      </label>
+      <label>Zoom <span id="zoomValue">105%</span>
+        <input id="zoom" type="range" min="1" max="3" step="0.01" value="1.05">
+      </label>
+      <div class="btnrow">
+        <button id="fillAll" type="button">Fill all panels</button>
+        <button id="resetCrop" type="button">Reset crop</button>
+      </div>
+    </div>
+
+    <div class="step">
+      <h2><span class="num">5</span> Caption</h2>
+      <label>Title
+        <input id="title" type="text" maxlength="40" value="Sunset Heist">
+      </label>
+      <label>Subtitle
+        <input id="subtitle" type="text" maxlength="40" value="Vice Coast">
+      </label>
+      <div class="grid2">
+        <label>Lettering
+          <select id="ink"></select>
+        </label>
+        <label>Title size
+          <input id="titleSize" type="range" min="0.7" max="1.4" step="0.05" value="1">
+        </label>
+      </div>
+      <label class="check"><input id="outline" type="checkbox" checked> Bold black outline</label>
+    </div>
+
+    <div class="step">
+      <h2><span class="num">6</span> Export</h2>
+      <div id="sizes" class="pickrow"></div>
+      <button id="shuffle" type="button" class="ghost">Surprise me</button>
+      <button id="export" type="button" class="big">Export PNG</button>
+      <p id="status" role="status"></p>
+    </div>
+  </section>
+
+  <section class="preview" aria-label="Live preview">
+    <canvas id="cover" width="920" height="518" aria-label="The cover preview"></canvas>
+    <p class="preview-hint">Live preview — click a panel to select it, drag to reposition the photo.</p>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
