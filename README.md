@@ -8,6 +8,8 @@ Vice Coast Cover Studio — a GTA 6-style cover art maker that runs entirely off
 
 > Round 2 note: rebuilt under a fresh recording so every file (README included) is witnessed in the build session.
 
+> Fresh re-record (round 2, take 2): every counted file rewritten again in this session so the round-2 snapshot is witnessed end to end.
+
 ## Run it
 
 ```sh
