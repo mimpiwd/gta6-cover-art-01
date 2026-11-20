@@ -6,6 +6,8 @@
 
 Vice Coast Cover Studio — a GTA 6-style cover art maker that runs entirely offline in your browser. Load your own photo, crop and position it across multi-panel layouts, write a bold caption, pick a Vice City sunset or neon grade, and export a share-ready PNG in 1080×1080, 1080×1350, or 1920×1080. No uploads, no network, no Rockstar artwork — everything is original.
 
+> Round 2 note: rebuilt under a fresh recording so every file (README included) is witnessed in the build session.
+
 ## Run it
 
 ```sh
